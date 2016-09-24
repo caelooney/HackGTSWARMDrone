@@ -31,48 +31,56 @@ app = Flask(__name__)
 def droneright(drone_ID):
     if drone_ID == 1:
         drone1.moveRight(0.5)
+        time.sleep(0.1)
 
 
 @app.route('/<drone_ID>/left')
 def droneleft(drone_ID):
     if drone_ID == 1:
         drone1.moveLeft(0.5)
+        time.sleep(0.1)
 
 
 @app.route('/<drone_ID>/forward')
 def droneforward(drone_ID):
     if drone_ID == 1:
         drone1.moveForward(0.5)
+        time.sleep(0.1)
 
 
 @app.route('/<drone_ID>/backward')
 def dronebackward(drone_ID):
     if drone_ID == 1:
         drone1.moveBackward(0.5)
+        time.sleep(0.1)
 
 
 @app.route('/<drone_ID>/up')
 def droneup(drone_ID):
     if drone_ID == 1:
         drone1.moveUp(0.5)
+        time.sleep(0.1)
 
 
 @app.route('/<drone_ID>/down')
 def dronedown(drone_ID):
     if drone_ID == 1:
         drone1.moveDown(0.5)
+        time.sleep(0.1)
 
 
 @app.route('/<drone_ID>/turnright')
 def robotright(drone_ID):
     if drone_ID == 1:
         drone1.turnRight(0.5)
+        time.sleep(0.1)
 
 
 @app.route('/<drone_ID>/turnleft')
 def robotleft(drone_ID):
     if drone_ID == 1:
         drone1.turnLeft(0.5)
+        time.sleep(0.1)
 
 if __name__ == "__main__":
     app.run()
