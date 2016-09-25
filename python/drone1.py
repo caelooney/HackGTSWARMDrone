@@ -10,10 +10,13 @@ from flask import Flask
 import time
 import ps_drone
 
+
 # /*/ Clean Start up Sequence /*/ #
 drone = ps_drone.Drone()                   # initializes the drone
 drone.startup()                            # connects the script to the drone
 drone.reset()                              # reset the lights on the drone
+
+drone.trim()                               # reset to the horizontal plane
 
 while drone.getBattery()[0] == -1:         # reset complete check
     time.sleep(0.1)
@@ -28,54 +31,115 @@ time.sleep(0.5)                                                                 
 app = Flask(__name__)
 
 
+@app.route('/drone/takeoff')
+def dronetakeoff():
+    print "Takeoff start"
+    drone.takeoff()
+    time.sleep(3)
+    drone.stop()
+    time.sleep(0.5)
+    print "Takeoff end"
+    return "takeoff"
+
+
 @app.route('/drone/right')
 def droneright():
-    drone.moveRight(0.5)
-    time.sleep(0.1)
+    print "right start"
+    drone.moveRight()
+    time.sleep(1.5)
+    drone.stop()
+    time.sleep(0.5)
+    print "right end"
+    return "right"
 
 
 @app.route('/drone/left')
 def droneleft():
-    drone.moveLeft(0.5)
-    time.sleep(0.1)
+    print "left start"
+    drone.moveLeft()
+    time.sleep(1.5)
+    drone.stop()
+    time.sleep(0.5)
+    print "left end"
+    return "left"
 
 
 @app.route('/drone/forward')
 def droneforward():
-    drone.moveForward(0.5)
-    time.sleep(0.1)
+    print "forward start"
+    drone.moveForward()
+    time.sleep(1.5)
+    drone.stop()
+    time.sleep(0.5)
+    print "forward end"
+    return "forward"
 
 
 @app.route('/drone/backward')
 def dronebackward():
-    drone.moveBackward(0.5)
-    time.sleep(0.1)
+    print "backward start"
+    drone.moveBackward()
+    time.sleep(1.5)
+    drone.stop()
+    time.sleep(0.5)
+    print "backward end"
+    return "end"
 
 
 @app.route('/drone/up')
 def droneup():
-    drone.moveUp(0.5)
-    time.sleep(0.1)
+    print "start up"
+    drone.moveUp()
+    time.sleep(1.5)
+    drone.stop()
+    time.sleep(0.5)
+    print "end up"
+    return "up"
 
 
 @app.route('/drone/down')
 def dronedown():
-    drone.moveDown(0.5)
-    time.sleep(0.1)
+    print "start down"
+    drone.moveDown()
+    time.sleep(1.5)
+    drone.stop()
+    time.sleep(0.5)
+    print "end down"
+    return "down"
 
 
 @app.route('/drone/turnright')
 def robotright():
-    drone.turnRight(0.5)
-    time.sleep(0.1)
+    print "start turn right"
+    drone.turnRight()
+    time.sleep(1.5)
+    drone.stop()
+    time.sleep(0.5)
+    print "end turn right"
+    return "turn right"
 
 
 @app.route('/drone/turnleft')
 def robotleft():
-    drone.turnLeft(0.5)
-    time.sleep(0.1)
+    print "start turn left"
+    drone.turnLeft()
+    time.sleep(1.5)
+    drone.stop()
+    time.sleep(0.5)
+    print "end turn left"
+    return "turn left"
+
+
+@app.route('/drone/land')
+def droneland():
+    print "start land"
+    drone.moveDown()
+    time.sleep(1.5)
+    drone.land()
+    time.sleep(0.5)
+    print "end land"
+    return "land"
 
 
 if __name__ == "__main__":
-    
     app.run()
